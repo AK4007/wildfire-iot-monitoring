@@ -1,4 +1,3 @@
-// src/components/AnimatedNavbar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -10,7 +9,8 @@ const AnimatedNavbar = () => {
         <Link to="/">Home</Link>
         <Link to="/map">Fire Map</Link>
         <Link to="/report">Report Fire</Link>
-        <Link to="/admin">Admin/Login</Link>
+        <Link to="/admin">Admin</Link>
+        <Link to="/login">Login</Link>
         <button className="border px-3 py-1 rounded">EN/FR</button>
       </div>
     </nav>

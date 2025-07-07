@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
 
 import HomePage from './pages/HomePage';
 import FireMapPage from './pages/FireMapPage';
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/map" element={<FireMapPage />} />
         <Route path="/report" element={<ReportFirePage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/admin" element={<AdminOverview />} />
         <Route path="/admin/table" element={<AdminDashboard />} />
       </Routes>
