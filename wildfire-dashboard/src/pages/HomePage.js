@@ -43,7 +43,7 @@ const HomePage = () => {
           transition={{ duration: 1, delay: 1 }}
           className="mt-8 flex gap-4 z-10"
         >
-          <Link to="/map" className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded text-white font-semibold">View Live Alerts</Link>
+          <Link to="/admin" className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded text-white font-semibold">View Live Alerts</Link>
           <Link to="/report" className="bg-yellow-500 hover:bg-yellow-600 px-6 py-2 rounded text-black font-semibold">Report Fire</Link>
         </motion.div>
       </div>
