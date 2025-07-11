@@ -6,8 +6,7 @@ const LiveAlerts = () => {
   const [latestTimestamp, setLatestTimestamp] = useState('');
   const [fireDetected, setFireDetected] = useState(false);
 
-  const API_URL = 'https://molcfvotxg.execute-api.us-east-2.amazonaws.com/prod/data';
-
+  const API_URL = 'http://18.189.248.234:5000/history?device_id=sensor001';
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -58,7 +57,7 @@ const LiveAlerts = () => {
             <div className="space-y-2 text-sm text-white/80">
               <p>🔌 <span className="text-white font-semibold">Total Sensor Readings:</span> {data.length}</p>
               <p>🔥 <span className="text-white font-semibold">Flame Value (Latest):</span> {data[0]?.payload?.flame ?? 'N/A'}</p>
-              <p>📡 <span className="text-white font-semibold">Active Sensors:</span> 1 (Simulated)</p>
+              <p>📡 <span className="text-white font-semibold">Active Sensors:</span> 1 </p>
               <p>🕒 <span className="text-white font-semibold">Last Update:</span> {latestTimestamp || 'N/A'}</p>
               <p>📈 <span className="text-white font-semibold">Average Temperature:</span> {
                 data.length > 0

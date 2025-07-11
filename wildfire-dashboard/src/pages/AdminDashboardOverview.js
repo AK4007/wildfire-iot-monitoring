@@ -9,7 +9,7 @@ const AdminDashboardOverview = () => {
   const [fireDetected, setFireDetected] = useState(false);
   const navigate = useNavigate();
 
-  const API_URL = 'https://molcfvotxg.execute-api.us-east-2.amazonaws.com/prod/data';
+  const API_URL = 'http://18.189.248.234:5000/history?device_id=sensor001';
 
   useEffect(() => {
     if (!isLoggedIn) return; // Don't fetch data if not logged in

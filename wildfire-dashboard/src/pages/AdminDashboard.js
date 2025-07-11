@@ -5,7 +5,7 @@ const AdminDashboard = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const API_URL = 'http://localhost:5000/history?device_id=sensor001';
+  const API_URL = 'http://18.189.248.234:5000/history?device_id=sensor001';
 
   useEffect(() => {
   const fetchData = async () => {
