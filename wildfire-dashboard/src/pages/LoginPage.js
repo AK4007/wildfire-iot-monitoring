@@ -1,62 +1,57 @@
+// src/pages/LoginPage.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Context/AuthContext';
+
 
 const LoginPage = () => {
-  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Simple static check – replace with real auth in production
     if (email === 'admin@wildfire.com' && password === 'admin123') {
-      navigate('/admin');
+      login(); // set auth true
+      navigate('/admin/dashboard'); // it has to go to Admin Dashboard for all the metrics
     } else {
-      alert('Invalid credentials. Try admin@example.com / admin123');
+      alert('Invalid credentials');
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center text-white">
+    
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <form
-        onSubmit={handleLogin}
-        className="bg-white/10 backdrop-blur-md p-8 rounded-lg shadow-lg w-full max-w-md"
+        onSubmit={handleSubmit}
+        className="bg-white p-10 rounded-xl shadow-lg space-y-6"
       >
-        <h2 className="text-2xl font-bold mb-6 text-center">🔐 Admin Login</h2>
+        <h2 className="text-2xl font-semibold text-center">Admin Login</h2>
+        
+        <input
+          type="email"
+          placeholder="Enter email"
+          className="w-full border px-4 py-2 rounded-md"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
-        <div className="mb-4">
-          <label htmlFor="email" className="block mb-2 text-sm font-medium text-white">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            className="w-full px-4 py-2 rounded bg-white/20 text-white border border-white/30 focus:outline-none focus:ring"
-            placeholder="admin@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-
-        <div className="mb-6">
-          <label htmlFor="password" className="block mb-2 text-sm font-medium text-white">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            className="w-full px-4 py-2 rounded bg-white/20 text-white border border-white/30 focus:outline-none focus:ring"
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
+        <input
+          type="password"
+          placeholder="Enter password"
+          className="w-full border px-4 py-2 rounded-md"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
 
         <button
           type="submit"
-          className="w-full py-2 rounded bg-orange-500 hover:bg-orange-600 font-semibold transition"
+          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
         >
           Login
         </button>

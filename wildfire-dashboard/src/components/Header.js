@@ -11,8 +11,7 @@ const Header = () => {
         <Link to="/" className="hover:text-orange-400 transition">Home</Link>
         <Link to="/map" className="hover:text-orange-400 transition">Fire Map</Link>
         <Link to="/report" className="hover:text-orange-400 transition">Report Fire</Link>
-        <Link to="/admin" className="hover:text-orange-400 transition">Admin</Link>
-        <Link to="/login" className="hover:text-orange-400 transition">Login</Link>
+        <Link to="/live-alerts" className="...">Live Alerts</Link>
         <button className="border border-white px-3 py-1 rounded hover:bg-white hover:text-black transition">EN/FR</button>
       </div>
     </nav>
