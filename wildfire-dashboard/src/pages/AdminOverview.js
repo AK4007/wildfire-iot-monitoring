@@ -20,7 +20,8 @@ const AdminOverview = () => {
 
         const latest = reversed.find(item => item.timestamp);
         if (latest) {
-          setFireDetected(latest.payload?.flame === 1);
+          const flameValue = Number(latest.payload?.flame);
+          setFireDetected(flameValue === 1);
           setLatestTimestamp(new Date(latest.timestamp).toLocaleString());
         }
       } catch (error) {
@@ -66,7 +67,7 @@ const AdminOverview = () => {
           <div className="space-y-2 text-sm text-white/80">
             <p>🔌 <span className="text-white font-semibold">Total Sensor Readings:</span> {data.length}</p>
             <p>🔥 <span className="text-white font-semibold">Flame Value (Latest):</span> {data[0]?.payload?.flame ?? 'N/A'}</p>
-            <p>📡 <span className="text-white font-semibold">Active Sensors:</span> 1 (Simulated)</p>
+            <p>📡 <span className="text-white font-semibold">Active Sensors:</span> 1 </p>
             <p>🕒 <span className="text-white font-semibold">Last Update:</span> {latestTimestamp || 'N/A'}</p>
             <p>🌡️ <span className="text-white font-semibold">Avg Temperature:</span> {
               data.length > 0
