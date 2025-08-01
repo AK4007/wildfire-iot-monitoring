@@ -38,7 +38,7 @@ const AdminDashboardOverview = () => {
     return () => clearInterval(interval);
   }, [isLoggedIn]);
 
-  const fireDetected = Number(latest?.flame) === 1;
+  const fireDetected = Number(latest?.flame) ===1;
 
   // ❌ Block access if not logged in
   if (!isLoggedIn) {
@@ -101,7 +101,7 @@ const AdminDashboardOverview = () => {
           <div className="space-y-2 text-sm text-white/80">
             <p>🔌 <span className="text-white font-semibold">Total Sensor Readings:</span> {data.length}</p>
             <p>🔥 <span className="text-white font-semibold">Flame Value (Latest):</span> {latest?.flame ?? 'N/A'}</p>
-            <p>📡 <span className="text-white font-semibold">Active Sensors:</span> 1 (Simulated)</p>
+            <p>📡 <span className="text-white font-semibold">Active Sensors:</span> 1 </p>
             <p>🕒 <span className="text-white font-semibold">Last Update:</span> {latest?.timestamp ? convertToLocalTime(latest.timestamp) : 'N/A'}</p>
             <p>🌡️ <span className="text-white font-semibold">Avg Temperature:</span> {latest?.temperature ?? 'N/A'} °C</p>
             <p>📍 <span className="text-white font-semibold">GPS Coordinates:</span> 

@@ -4,11 +4,13 @@ import AnimatedNavbar from '../components/AnimatedNavbar';
 const LiveAlerts = () => {
   const [data, setData] = useState([]);
   const [latest, setLatest] = useState(null);
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
 
+  // Updated API Gateway endpoint for /history
   const API_URL = 'http://18.189.248.234:5000/history?device_id=sensor001';
   const SUBSCRIBE_API = 'https://molcfvotxg.execute-api.us-east-2.amazonaws.com/prod/subscribe';
+
+  const [email, setEmail] = useState('');
+  const [subscribeMessage, setSubscribeMessage] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,7 +19,6 @@ const LiveAlerts = () => {
           method: 'GET',
           mode: 'cors',
           headers: {
-            'X-User-Role': 'government',
             'Content-Type': 'application/json',
           },
         });
@@ -57,26 +58,30 @@ const LiveAlerts = () => {
 
   const fireDetected = Number(latest?.flame) === 1;
 
-  // SNS Subscribe logic
+  // Subscription handler
   const handleSubscribe = async () => {
     if (!email) {
-      setMessage('Please enter a valid email address.');
+      setSubscribeMessage('⚠️ Please enter a valid email');
       return;
     }
 
     try {
-      const res = await fetch(SUBSCRIBE_API, {
+      const response = await fetch(SUBSCRIBE_API, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email }),
       });
-      const data = await res.json();
 
-      // Trigger "Subscribed" state
-      setMessage('✅ Subscribed! Please confirm via your email.');
-    } catch (err) {
-      console.error(err);
-      setMessage('Failed to subscribe. Try again.');
+      if (response.ok) {
+        const result = await response.json();
+        setSubscribeMessage(`✅ ${result.message}`);
+        setEmail('');
+      } else {
+        setSubscribeMessage('❌ Failed to subscribe. Try again.');
+      }
+    } catch (error) {
+      console.error('Error subscribing:', error);
+      setSubscribeMessage('❌ Error. Please try again.');
     }
   };
 
@@ -129,45 +134,33 @@ const LiveAlerts = () => {
               <li>
                 📍 <span className="text-white font-semibold">GPS Coordinates:</span>{' '}
                 {latest?.latitude && latest?.longitude
-                  ? `${latest.latitude.toFixed(4)}, ${latest.longitude.toFixed(4)}`
+                  ? `${Number(latest.latitude).toFixed(4)}, ${Number(latest.longitude).toFixed(4)}`
                   : 'N/A'}
               </li>
             </ul>
           </div>
         </div>
 
-        {/* SNS Subscribe Section */}
-        <div className="text-center mt-10">
-          <h3 className="text-xl font-semibold mb-3">📧 Subscribe to Alerts</h3>
-          <div className="flex flex-col md:flex-row justify-center items-center gap-3">
+        {/* Subscribe to Alerts Section */}
+        <div className="mt-10 text-center">
+          <h2 className="text-2xl font-semibold mb-3">📧 Subscribe to Alerts</h2>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-3">
             <input
               type="email"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              disabled={message.includes('Subscribed')}
-              className="border border-gray-300 rounded px-4 py-2 w-72 text-black"
+              className="px-4 py-2 rounded-md text-black w-72"
             />
             <button
               onClick={handleSubscribe}
-              disabled={message.includes('Subscribed')}
-              className={`px-5 py-2 rounded ${
-                message.includes('Subscribed')
-                  ? 'bg-green-600 cursor-not-allowed'
-                  : 'bg-blue-600 hover:bg-blue-700 text-white'
-              }`}
+              className="px-6 py-2 rounded-md bg-blue-600 hover:bg-blue-700"
             >
-              {message.includes('Subscribed') ? '✅ Subscribed' : 'Subscribe'}
+              Subscribe
             </button>
           </div>
-          {message && (
-            <p
-              className={`mt-2 ${
-                message.includes('Subscribed') ? 'text-green-400' : 'text-yellow-400'
-              }`}
-            >
-              {message}
-            </p>
+          {subscribeMessage && (
+            <p className="mt-3 text-sm text-yellow-300">{subscribeMessage}</p>
           )}
         </div>
       </div>
