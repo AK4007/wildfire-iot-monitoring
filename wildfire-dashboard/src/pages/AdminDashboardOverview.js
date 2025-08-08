@@ -72,7 +72,7 @@ const AdminDashboardOverview = () => {
         {/*  Fire Alert Status */}
         <div
           className={`p-6 rounded-2xl shadow-lg transition-transform transform hover:-translate-y-2 border ${
-            fireDetected ? 'bg-red-700/80 border-red-500' : 'bg-green-700/80 border-green-500'
+            fireDetected ? 'bg-red-700 border-red-500' : 'bg-green-700 border-green-500'
           }`}
         >
           <h2 className="text-xl font-semibold mb-2">🔥 Fire Alert Status</h2>

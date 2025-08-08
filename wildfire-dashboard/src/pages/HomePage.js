@@ -27,7 +27,7 @@ const HomePage = () => {
           transition={{ duration: 1 }}
           className="text-5xl md:text-6xl font-bold z-10"
         >
-          Real-Time Wildfire Detection & Alerts
+          Real-Time SIMIIIIIIII Wildfire Detection & Alerts
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
